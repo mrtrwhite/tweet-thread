@@ -3,7 +3,8 @@ html {
   padding: 0;
   margin: 0;
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
-  font-size: 16px; }
+  font-size: 16px;
+  background: #68c5ff; }
 
 body * {
   padding: 0;
@@ -19,7 +20,10 @@ body * {
   background-color: #1da1f2;
   color: #fff;
   text-transform: uppercase;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: all 0.35s ease-in-out; }
+  .twitter-button:hover {
+    background-color: #4db5f5; }
 
 .wrap {
   display: block;
@@ -29,37 +33,43 @@ body * {
   margin: 0 auto;
   text-align: center; }
 
-.home-wrap .title,
-.home-wrap .intro {
+.header,
+.footer {
   width: 100%;
-  margin-bottom: 20px; }
-
-.chain-wrap p {
-  width: 100%;
-  margin-bottom: 20px; }
-
-.chain-wrap textarea {
-  width: 100%;
-  max-width: 500px;
-  height: 100px;
-  clear: both;
-  font-size: 12px;
-  margin-bottom: 10px; }
-
-.chain-wrap .sections {
-  display: block;
-  clear: both;
-  width: 100%;
+  padding: 30px 0;
   text-align: center; }
-  .chain-wrap .sections > div {
-    width: 500px;
-    height: 100px;
-    margin-bottom: 10px;
-    border: 1px solid grey;
-    text-align: left;
-    font-size: 12px; }
 
-.chain-wrap .send-button {
-  display: none; }
-  .chain-wrap .send-button.show {
-    display: inline-block; }
+.home-wrap {
+  background: radial-gradient(circle farthest-corner at center bottom, #35b1ff 0%, #68c5ff 100%); }
+  .home-wrap .intro {
+    width: 100%;
+    margin-bottom: 20px; }
+
+.chain-wrap {
+  background: radial-gradient(circle farthest-corner at center bottom, #35b1ff 0%, #68c5ff 100%); }
+  .chain-wrap p {
+    width: 100%;
+    margin-bottom: 20px; }
+  .chain-wrap textarea {
+    width: 100%;
+    max-width: 500px;
+    height: 100px;
+    clear: both;
+    font-size: 12px;
+    margin-bottom: 10px; }
+  .chain-wrap .sections {
+    display: block;
+    clear: both;
+    width: 100%;
+    text-align: center; }
+    .chain-wrap .sections > div {
+      width: 500px;
+      height: 100px;
+      margin-bottom: 10px;
+      border: 1px solid grey;
+      text-align: left;
+      font-size: 12px; }
+  .chain-wrap .send-button {
+    display: none; }
+    .chain-wrap .send-button.show {
+      display: inline-block; }
