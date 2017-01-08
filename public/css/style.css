@@ -1,0 +1,65 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 16px; }
+
+body * {
+  padding: 0;
+  margin: 0;
+  display: inline-block; }
+
+.height-auto {
+  height: auto;
+  overflow: auto; }
+
+.twitter-button {
+  padding: 10px 30px;
+  background-color: #1da1f2;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer; }
+
+.wrap {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center; }
+
+.home-wrap .title,
+.home-wrap .intro {
+  width: 100%;
+  margin-bottom: 20px; }
+
+.chain-wrap p {
+  width: 100%;
+  margin-bottom: 20px; }
+
+.chain-wrap textarea {
+  width: 100%;
+  max-width: 500px;
+  height: 100px;
+  clear: both;
+  font-size: 12px;
+  margin-bottom: 10px; }
+
+.chain-wrap .sections {
+  display: block;
+  clear: both;
+  width: 100%;
+  text-align: center; }
+  .chain-wrap .sections > div {
+    width: 500px;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid grey;
+    text-align: left;
+    font-size: 12px; }
+
+.chain-wrap .send-button {
+  display: none; }
+  .chain-wrap .send-button.show {
+    display: inline-block; }

@@ -1,0 +1,84 @@
+$twitter-blue: #1da1f2;
+$white: #fff;
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+body * {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.height-auto {
+    height: auto;
+    overflow: auto;
+}
+
+.twitter-button {
+    padding: 10px 30px;
+    background-color: $twitter-blue;
+    color: $white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.wrap {
+    display: block;
+    width: 100%;
+    max-width: 960px;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-wrap {
+    .title,
+    .intro {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+//ew
+.chain-wrap {
+    p {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    textarea {
+        width: 100%;
+        max-width: 500px;
+        height: 100px;
+        clear: both;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .sections {
+        display: block;
+        clear: both;
+        width: 100%;
+        text-align: center;
+
+        > div {
+            width: 500px;
+            height: 100px;
+            margin-bottom: 10px;
+            border: 1px solid grey;
+            text-align: left;
+            font-size: 12px;
+        }
+    }
+    .send-button {
+        display: none;
+
+        &.show {
+            display: inline-block;
+        }
+    }
+}
