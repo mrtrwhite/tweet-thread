@@ -9,6 +9,13 @@ html {
 body * {
   padding: 0;
   margin: 0;
+  display: inline-block;
+  box-sizing: border-box; }
+
+.hide {
+  display: none; }
+
+.show {
   display: inline-block; }
 
 .height-auto {
@@ -23,7 +30,7 @@ body * {
   cursor: pointer;
   transition: all 0.35s ease-in-out; }
   .twitter-button:hover {
-    background-color: #4db5f5; }
+    background-color: #0c85d0; }
 
 .wrap {
   display: block;
@@ -39,37 +46,43 @@ body * {
   padding: 30px 0;
   text-align: center; }
 
-.home-wrap {
-  background: radial-gradient(circle farthest-corner at center bottom, #35b1ff 0%, #68c5ff 100%); }
-  .home-wrap .intro {
-    width: 100%;
-    margin-bottom: 20px; }
+.header h1 {
+  font-family: 'Roboto Slab'; }
 
-.chain-wrap {
-  background: radial-gradient(circle farthest-corner at center bottom, #35b1ff 0%, #68c5ff 100%); }
-  .chain-wrap p {
-    width: 100%;
-    margin-bottom: 20px; }
-  .chain-wrap textarea {
-    width: 100%;
-    max-width: 500px;
-    height: 100px;
-    clear: both;
-    font-size: 12px;
-    margin-bottom: 10px; }
-  .chain-wrap .sections {
-    display: block;
-    clear: both;
-    width: 100%;
-    text-align: center; }
-    .chain-wrap .sections > div {
-      width: 500px;
-      height: 100px;
-      margin-bottom: 10px;
-      border: 1px solid grey;
-      text-align: left;
-      font-size: 12px; }
-  .chain-wrap .send-button {
-    display: none; }
-    .chain-wrap .send-button.show {
-      display: inline-block; }
+.intro {
+  width: 100%;
+  margin: 10px 0; }
+
+.chain-wrap p {
+  width: 100%;
+  margin-bottom: 20px; }
+
+.textarea {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  clear: both;
+  font-size: 16px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 20px; }
+
+.sections {
+  display: block;
+  clear: both;
+  width: 100%;
+  text-align: center; }
+  .sections li {
+    width: 100%; }
+
+.section {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  overflow: auto;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px; }

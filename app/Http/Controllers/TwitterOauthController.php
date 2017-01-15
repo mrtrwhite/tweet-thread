@@ -42,34 +42,45 @@ class TwitterOauthController extends Controller
             'oauth_token' => $request_token['oauth_token']
         ));
 
-        return array(
+        return response()->json([
             'url' => $url
-        );
+        ]);
     }
 
     public function finalise(Request $request) {
         session_start();
 
         if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
-            return view('tweet');
+            $access_token = $_SESSION['access_token'];
+            $connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+            $user = $connection->get("account/verify_credentials");
+
+            $handle = $user->screen_name;
+
+            return view('tweet')->with('handle', $handle);
         } else {
             $oauth_token = $_SESSION['oauth_token'];
             $oauth_token_secret = $_SESSION['oauth_token_secret'];
 
             if ($request->input('oauth_token') !== false && $oauth_token !== $request->input('oauth_token')) {
-                abort(500, 'Missing parameters.');
+                abort(422, 'Missing parameters.');
             }
 
             $connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $oauth_token, $oauth_token_secret);
 
-            $this->access_token = $connection->oauth('oauth/access_token', array(
+            $access_token = $connection->oauth('oauth/access_token', array(
                 'oauth_verifier' => $request->input('oauth_verifier')
             ));
 
-            $_SESSION['access_token'] = $this->access_token;
+            $_SESSION['access_token'] = $access_token;
 
-            if($this->access_token) {
-                return view('tweet');
+            $connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+            $user = $connection->get("account/verify_credentials");
+
+            $handle = $user->screen_name;
+
+            if($access_token) {
+                return view('tweet')->with('handle', $handle);
             } else {
                 redirect()->route('/');
             }
@@ -77,10 +88,38 @@ class TwitterOauthController extends Controller
     }
 
     public function sendTweets(Request $request) {
-        if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+        session_start();
+        if(isset($_SESSION['access_token'])) {
+            $access_token = $_SESSION['access_token'];
+            $connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
+            $sections = $request->input('sections');
+
+            $user = $connection->get("account/verify_credentials");
+
+            $responses = array();
+            $previous = false;
+            foreach ($sections as $key => $section) {
+                if($previous) {
+                    $status = $connection->post('statuses/update', array(
+                        'status' => $section,
+                        'in_reply_to_status_id' => $previous
+                    ));
+                    $previous = $status->id;
+                    $responses[] = $status;
+                } else {
+                    $status = $connection->post('statuses/update', array(
+                        'status' => $section
+                    ));
+                    $previous = $status->id;
+                    $responses[] = $status;
+                }
+            }
+            return response()->json([
+                'status' => $responses
+            ]);
         } else {
-            redirect()->route('/');
+            abort(422, 'Missing parameters.');
         }
     }
 }

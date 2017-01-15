@@ -1,4 +1,4 @@
-function req(method, url, cb, err) {
+function req(method, url, cb, err, data) {
     var request = new XMLHttpRequest();
     request.open(method, url, true);
     request.onload = function() {
@@ -6,10 +6,15 @@ function req(method, url, cb, err) {
             var resp = JSON.parse(request.responseText);
             cb(resp);
         } else {
-            err(request.statusText)
+            err(request)
         }
     };
-    request.send();
+    if(method === 'POST' && data) {
+        request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        request.send(JSON.stringify(data));
+    } else {
+        request.send();
+    }
 }
 
 module.exports = {

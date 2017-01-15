@@ -960,20 +960,74 @@
   return cash;
 });
 },{}],2:[function(require,module,exports){
-var home = require('./modules/home.js');
-var textSplit = require('./modules/textSplit.js');
+var twitter = require('./modules/twitter.js');
 
-home.init();
-textSplit.init();
+twitter.init();
 
-},{"./modules/home.js":3,"./modules/textSplit.js":4}],3:[function(require,module,exports){
+},{"./modules/twitter.js":4}],3:[function(require,module,exports){
+var $ = require('cash-dom');
+
+function textModel() {
+    if ($('.js-handle').length > 0 && $('.js-handle').text() != '') {
+        var handle = $('.js-handle').text().replace('@', '');
+        var self = this;
+        self.handle = ko.observable(handle);
+        self.textString = ko.observable('');
+        self.sections = ko.observableArray([]);
+        self.textString.subscribe(function (string) {
+            if (string.length > 0) {
+                var handleLength = self.handle().length;
+                var sectionLength = 140 - handleLength;
+                var firstTweet = string.match(new RegExp('.{1,' + 140 + '}', 'g'))[0];
+                self.sections([firstTweet]);
+                var remainingChars = string.slice(firstTweet.length);
+                if (remainingChars) {
+                    var otherTweets = remainingChars.match(new RegExp('.{1,' + sectionLength + '}', 'g'));
+                    self.sections(self.sections().concat(otherTweets));
+                }
+            } else {
+                self.sections([]);
+            }
+        });
+    }
+}
+
+module.exports = {
+    textModel: textModel
+};
+
+},{"cash-dom":1}],4:[function(require,module,exports){
 var $ = require('cash-dom');
 var utils = require('./utils.js');
+var textSplit = require('./textSplit.js');
 
 function home() {
     $('.js-authorise').on('click', function (e) {
         utils.req('GET', '/authorise', function (data) {
-            window.location = data.url;
+            if (data.url) {
+                window.location = data.url;
+            }
+        });
+    }, function (err) {
+        console.log(err);
+    });
+}
+
+function tweet() {
+    var textSplitter = new textSplit.textModel();
+    ko.applyBindings(textSplitter);
+
+    $('.js-send-tweets').on('click', function (e) {
+        var sections = textSplitter.sections();
+        var handle = $('.js-handle').text();
+        utils.req('POST', '/send_tweets', function (data) {
+            console.log(data);
+        }, function (err) {
+            if (err.status == 422) {
+                window.location = '/';
+            }
+        }, {
+            'sections': sections
         });
     }, function (err) {
         console.log(err);
@@ -982,35 +1036,15 @@ function home() {
 
 function init() {
     home();
+    tweet();
 }
 
 module.exports = {
     init: init
 };
 
-},{"./utils.js":5,"cash-dom":1}],4:[function(require,module,exports){
-function textModel() {
-    var self = this;
-    self.textString = ko.observable('');
-    self.sections = ko.observableArray([]);
-    self.firstSection = ko.observable('');
-    self.textString.subscribe(function (string) {
-        var sectionLength = 140;
-        self.sections(string.match(new RegExp('.{1,' + 140 + '}', 'g')));
-    });
-}
-
-function init() {
-    var textSplitter = new textModel();
-    ko.applyBindings(textSplitter);
-}
-
-module.exports = {
-    init: init
-};
-
-},{}],5:[function(require,module,exports){
-function req(method, url, cb, err) {
+},{"./textSplit.js":3,"./utils.js":5,"cash-dom":1}],5:[function(require,module,exports){
+function req(method, url, cb, err, data) {
     var request = new XMLHttpRequest();
     request.open(method, url, true);
     request.onload = function () {
@@ -1018,10 +1052,15 @@ function req(method, url, cb, err) {
             var resp = JSON.parse(request.responseText);
             cb(resp);
         } else {
-            err(request.statusText);
+            err(request);
         }
     };
-    request.send();
+    if (method === 'POST' && data) {
+        request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        request.send(JSON.stringify(data));
+    } else {
+        request.send();
+    }
 }
 
 module.exports = {

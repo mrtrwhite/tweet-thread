@@ -1,5 +1,3 @@
-var home = require('./modules/home.js');
-var textSplit = require('./modules/textSplit.js');
+var twitter = require('./modules/twitter.js');
 
-home.init();
-textSplit.init();
+twitter.init();
