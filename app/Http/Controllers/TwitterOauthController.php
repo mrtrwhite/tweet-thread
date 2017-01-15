@@ -99,6 +99,7 @@ class TwitterOauthController extends Controller
 
             $responses = array();
             $previous = false;
+
             foreach ($sections as $key => $section) {
                 if($previous) {
                     $status = $connection->post('statuses/update', array(
@@ -115,6 +116,10 @@ class TwitterOauthController extends Controller
                     $responses[] = $status;
                 }
             }
+            return response()->json([
+                'status' => 200,
+                'response' => $responses
+            ]);
         } else {
             abort(422, 'Missing parameters.');
         }
