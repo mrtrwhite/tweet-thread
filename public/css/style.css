@@ -9,8 +9,10 @@ html {
 body * {
   padding: 0;
   margin: 0;
-  display: inline-block;
   box-sizing: border-box; }
+
+p {
+  margin-bottom: 20px; }
 
 .hide {
   display: none; }
@@ -21,6 +23,12 @@ body * {
 .height-auto {
   height: auto;
   overflow: auto; }
+
+.align-center {
+  text-align: center; }
+
+.full {
+  width: 100%; }
 
 .twitter-button {
   padding: 10px 30px;
@@ -33,33 +41,31 @@ body * {
     background-color: #0c85d0; }
 
 .wrap {
-  display: block;
   width: 100%;
-  max-width: 960px;
+  max-width: 640px;
   padding: 20px;
   margin: 0 auto;
   text-align: center; }
 
 .header,
 .footer {
-  width: 100%;
-  padding: 30px 0;
-  text-align: center; }
+  padding: 30px 0; }
 
-.header h1 {
-  font-family: 'Roboto Slab'; }
+.header .h1 {
+  font-family: Roboto Slab, Georgia, serif; }
 
 .intro {
-  width: 100%;
   margin: 10px 0; }
 
-.chain-wrap p {
-  width: 100%;
-  margin-bottom: 20px; }
+.chain-wrap {
+  transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+  opacity: 1;
+  max-height: 3000px; }
+  .chain-wrap.isHidden {
+    max-height: 0;
+    opacity: 0; }
 
 .textarea {
-  width: 100%;
-  max-width: 500px;
   height: 300px;
   clear: both;
   font-size: 16px;
@@ -68,21 +74,30 @@ body * {
   border: none;
   padding: 20px; }
 
-.sections {
-  display: block;
-  clear: both;
-  width: 100%;
-  text-align: center; }
-  .sections li {
-    width: 100%; }
-
 .section {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  overflow: auto;
   margin-bottom: 20px;
   text-align: left;
   font-size: 16px;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 20px; }
+
+.results {
+  opacity: 0;
+  visibility: none;
+  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1); }
+  .results.isActive {
+    opacity: 1;
+    background-color: #fff;
+    color: #1da1f2; }
+  .results.isError {
+    opacity: 1;
+    background-color: #ff2437;
+    color: #fff; }
+
+@media screen and (min-width: 1920px) {
+  .wrap {
+    max-width: 960px; } }
+
+@media screen and (min-width: 2560px) {
+  .wrap {
+    max-width: 1280px; } }

@@ -115,10 +115,6 @@ class TwitterOauthController extends Controller
                     $responses[] = $status;
                 }
             }
-            return response()->json([
-                'status' => 200,
-                'response' => $responses
-            ]);
         } else {
             abort(422, 'Missing parameters.');
         }

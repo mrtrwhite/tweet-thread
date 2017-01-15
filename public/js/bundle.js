@@ -975,19 +975,7 @@ function textModel() {
         self.textString = ko.observable('');
         self.sections = ko.observableArray([]);
         self.textString.subscribe(function (string) {
-            if (string.length > 0) {
-                var handleLength = self.handle().length;
-                var sectionLength = 140 - handleLength;
-                var firstTweet = string.match(new RegExp('.{1,' + 140 + '}', 'g'))[0];
-                self.sections([firstTweet]);
-                var remainingChars = string.slice(firstTweet.length);
-                if (remainingChars) {
-                    var otherTweets = remainingChars.match(new RegExp('.{1,' + sectionLength + '}', 'g'));
-                    self.sections(self.sections().concat(otherTweets));
-                }
-            } else {
-                self.sections([]);
-            }
+            self.sections(string.match(new RegExp('.{1,' + 140 + '}', 'g')));
         });
     }
 }
@@ -1021,7 +1009,13 @@ function tweet() {
         var sections = textSplitter.sections();
         var handle = $('.js-handle').text();
         utils.req('POST', '/send_tweets', function (data) {
-            console.log(data);
+            if (data.status === 200) {
+                $('.js-chain-wrap').addClass('isHidden').on('transitionend', function () {
+                    $('.js-results').text('Tweet thread successful.').addClass('isActive');
+                });
+            } else {
+                $('.js-results').text('Tweet thread unsuccessful.').addClass('isError');
+            }
         }, function (err) {
             if (err.status == 422) {
                 window.location = '/';

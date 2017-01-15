@@ -22,7 +22,13 @@ function tweet() {
         var sections = textSplitter.sections();
         var handle = $('.js-handle').text();
         utils.req('POST', '/send_tweets', function(data) {
-            console.log(data);
+            if(data.status === 200) {
+                $('.js-chain-wrap').addClass('isHidden').on('transitionend', function() {
+                    $('.js-results').text('Tweet thread successful.').addClass('isActive');
+                });
+            } else {
+                $('.js-results').text('Tweet thread unsuccessful.').addClass('isError');
+            }
         }, function(err) {
             if(err.status == 422) {
                 window.location = '/';
