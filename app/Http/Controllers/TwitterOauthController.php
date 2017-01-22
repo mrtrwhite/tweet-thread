@@ -89,7 +89,15 @@ class TwitterOauthController extends Controller
 
     public function sendTweets(Request $request) {
         session_start();
+
         if(isset($_SESSION['access_token'])) {
+
+            $sections = $request->input('sections');
+
+            //if this were full Laravel we'd make a custom Request and validate here
+            if(empty($sections))
+                abort(422, 'Missing parameters.');
+
             $access_token = $_SESSION['access_token'];
             $connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
@@ -121,7 +129,7 @@ class TwitterOauthController extends Controller
                 'response' => $responses
             ]);
         } else {
-            abort(422, 'Missing parameters.');
+            abort(400, 'Missing parameters.');
         }
     }
 }

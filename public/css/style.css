@@ -103,7 +103,7 @@ p {
   padding: 20px;
   opacity: 0;
   visibility: none;
-  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1); }
+  transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1); }
   .results.isActive {
     opacity: 1;
     background-color: #fff;

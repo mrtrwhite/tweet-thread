@@ -24,14 +24,17 @@ function tweet() {
         utils.req('POST', '/send_tweets', function(data) {
             if(data.status === 200) {
                 $('.js-chain-wrap').addClass('isHidden').on('transitionend', function() {
-                    $('.js-results').text('Tweet thread successful.').addClass('isActive');
+                    $('.js-results').removeClass('isError').text('Tweet thread successful.').addClass('isActive');
                 });
             } else {
                 $('.js-results').text('Tweet thread unsuccessful.').addClass('isError');
             }
         }, function(err) {
-            if(err.status == 422) {
+            if(err.status === 400) {
                 window.location = '/';
+            }
+            if(err.status === 422) {
+                $('.js-results').text('Missing required parameters.').addClass('isError');
             }
         }, {
             'sections': sections
