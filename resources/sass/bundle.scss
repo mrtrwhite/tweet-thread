@@ -7,6 +7,9 @@ $body: 'Roboto', 'Helvetica', 'Arial', 'sans-serif';
 //colours
 $light-blue: #68c5ff;
 $twitter-blue: #1da1f2;
+$dark-blue: #111d3c;
+$dark-blue-desaturated: #1E2442;
+$very-dark-blue: #0c1429;
 $white: #fff;
 $dark-grey: #313131;
 $error: #ff2437;
@@ -21,7 +24,7 @@ html {
     margin: 0;
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     font-size: 16px;
-    background: $light-blue;
+    background: $dark-blue;
 }
 
 body * {
@@ -56,6 +59,10 @@ p {
     width: 100%;
 }
 
+.white {
+    color: $white;
+}
+
 //buttons
 .twitter-button {
     padding: 10px 30px;
@@ -63,6 +70,7 @@ p {
     color: $white;
     text-transform: uppercase;
     cursor: pointer;
+    display: inline-block;
     transition: all 0.35s ease-in-out;
 
     &:hover {
@@ -74,7 +82,7 @@ p {
 .wrap {
     width: 100%;
     max-width: 640px;
-    padding: 20px;
+    padding: 0 20px;
     margin: 0 auto;
     text-align: center;
 }
@@ -83,21 +91,33 @@ p {
 .header,
 .footer {
     padding: 30px 0;
+    color: $white;
 }
 
 .header .h1 {
     font-family: #{$header};
+    letter-spacing: 3px;
 }
 
 .intro {
     margin: 10px 0;
 }
 
+.home-wrap {
+    background-color: $very-dark-blue;
+    padding: 50px 0;
+    box-shadow: inset 0px 0px 30px 5px rgba(0,0,0,0.24);
+}
+
 //ew
 .chain-wrap {
+    background-color: $very-dark-blue;
+    box-shadow: inset 0px 0px 30px 5px rgba(0,0,0,0.24);
+    padding: 50px 0;
     transition: all 0.35s #{$cubic-default};
     opacity: 1;
     max-height: 3000px;
+    color: $white;
 
     &.isHidden {
         max-height: 0;
@@ -110,17 +130,19 @@ p {
     clear: both;
     font-size: 16px;
     margin-bottom: 20px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: $dark-blue-desaturated;
     border: none;
     padding: 20px;
+    color: $white;
 }
 
 .section {
     margin-bottom: 20px;
     text-align: left;
     font-size: 16px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: $dark-blue-desaturated;
     padding: 20px;
+    color: $white;
 }
 
 .results {

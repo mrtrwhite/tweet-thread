@@ -4,7 +4,7 @@ html {
   margin: 0;
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 16px;
-  background: #68c5ff; }
+  background: #111d3c; }
 
 body * {
   padding: 0;
@@ -30,12 +30,16 @@ p {
 .full {
   width: 100%; }
 
+.white {
+  color: #fff; }
+
 .twitter-button {
   padding: 10px 30px;
   background-color: #1da1f2;
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
+  display: inline-block;
   transition: all 0.35s ease-in-out; }
   .twitter-button:hover {
     background-color: #0c85d0; }
@@ -43,24 +47,35 @@ p {
 .wrap {
   width: 100%;
   max-width: 640px;
-  padding: 20px;
+  padding: 0 20px;
   margin: 0 auto;
   text-align: center; }
 
 .header,
 .footer {
-  padding: 30px 0; }
+  padding: 30px 0;
+  color: #fff; }
 
 .header .h1 {
-  font-family: Roboto Slab, Georgia, serif; }
+  font-family: Roboto Slab, Georgia, serif;
+  letter-spacing: 3px; }
 
 .intro {
   margin: 10px 0; }
 
+.home-wrap {
+  background-color: #0c1429;
+  padding: 50px 0;
+  box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.24); }
+
 .chain-wrap {
+  background-color: #0c1429;
+  box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.24);
+  padding: 50px 0;
   transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
   opacity: 1;
-  max-height: 3000px; }
+  max-height: 3000px;
+  color: #fff; }
   .chain-wrap.isHidden {
     max-height: 0;
     opacity: 0; }
@@ -70,16 +85,18 @@ p {
   clear: both;
   font-size: 16px;
   margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #1E2442;
   border: none;
-  padding: 20px; }
+  padding: 20px;
+  color: #fff; }
 
 .section {
   margin-bottom: 20px;
   text-align: left;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 20px; }
+  background-color: #1E2442;
+  padding: 20px;
+  color: #fff; }
 
 .results {
   opacity: 0;
